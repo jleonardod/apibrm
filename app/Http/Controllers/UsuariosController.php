@@ -29,6 +29,37 @@ class UsuariosController extends Controller
         }
     }
 
+    public function borrado($id){
+        if(Usuarios::where('id', $id)->exists()){
+            $usuario = Usuarios::find($id);
+            $usuario->delete();
+
+            return response()->json([
+                "message" => "records delete"
+            ], 202);
+        }else{
+            return response()->json([
+                "message" => "Usuario not found"
+            ], 404);
+        }
+    }
+
+    public function actualizaUsuario(Request $request, $id){
+        if(Usuarios::where('id', $id)->exists()){
+            $usuario = Usuarios::find($id);
+
+            $usuario->update($request->all());
+
+            return response()->json([
+                "message" => "records updated successfully"
+            ], 200);
+        }else{
+            return response()->json([
+                "message" => "Usuario no encontrado"
+            ], 404);
+        }
+    }
+
     /**
      * Show the form for creating a new resource.
      *

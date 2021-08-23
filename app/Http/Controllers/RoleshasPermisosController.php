@@ -19,8 +19,8 @@ class RoleshasPermisosController extends Controller
     }
 
     public function getPermisos($idRol){
-        if(RoleshasPermisos::where('idRol', "1")->exists()){
-            $roles_has_permiso = RoleshasPermisos::where('idRol', "1")->get()->toJson(JSON_PRETTY_PRINT);
+        if(RoleshasPermisos::where('idRol', $idRol)->exists()){
+            $roles_has_permiso = RoleshasPermisos::where('idRol', $idRol)->get()->toJson(JSON_PRETTY_PRINT);
             return response($roles_has_permiso);
         }else{
             return response()->json([
